@@ -1,471 +1,535 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Adjustment Proposal — $383 USD Increase</title>
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f9fafb;
-            color: #374151;
-            line-height: 1.6;
-        }
-        
-        .container {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .space-y-8 > * + * {
-            margin-top: 2rem;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-        }
-        
-        .card h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: #1f2937;
-        }
-        
-        .cover-slide {
-            text-align: center;
-            padding: 2.5rem;
-            background-color: #fefce8;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .cover-slide h1 {
-            font-size: 2.25rem;
-            font-weight: bold;
-            margin-bottom: 0.75rem;
-            color: #a16207;
-        }
-        
-        .cover-slide p {
-            color: #374151;
-            font-size: 1.125rem;
-        }
-        
-        .cover-slide .meta {
-            margin-top: 1rem;
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
-        
-        .text-sm {
-            font-size: 0.875rem;
-        }
-        
-        .text-gray-700 {
-            color: #374151;
-        }
-        
-        .text-gray-600 {
-            color: #4b5563;
-        }
-        
-        .text-gray-800 {
-            color: #1f2937;
-        }
-        
-        .italic {
-            font-style: italic;
-        }
-        
-        .font-semibold {
-            font-weight: 600;
-        }
-        
-        ul.list-disc {
-            list-style-type: disc;
-            margin-left: 1.5rem;
-        }
-        
-        ol.list-decimal {
-            list-style-type: decimal;
-            margin-left: 1.5rem;
-        }
-        
-        .space-y-1 > * + * {
-            margin-top: 0.25rem;
-        }
-        
-        .space-y-2 > * + * {
-            margin-top: 0.5rem;
-        }
-        
-        .mt-2 {
-            margin-top: 0.5rem;
-        }
-        
-        .mt-3 {
-            margin-top: 0.75rem;
-        }
-        
-        .mt-4 {
-            margin-top: 1rem;
-        }
-        
-        .mb-2 {
-            margin-bottom: 0.5rem;
-        }
-        
-        .mb-4 {
-            margin-bottom: 1rem;
-        }
-        
-        .bg-yellow-100 {
-            background-color: #fef3c7;
-        }
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .text-yellow-900 {
-            color: #78350f;
-        }
-        
-        .text-blue-700 {
-            color: #1d4ed8;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1rem;
-        }
-        
-        table th,
-        table td {
-            padding: 0.5rem;
-            border: 1px solid #d1d5db;
-            text-align: left;
-        }
-        
-        table thead {
-            background-color: #fde68a;
-        }
-        
-        a {
-            color: #1d4ed8;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin-top: 1rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Operational and financial summary for Semesters 1 and 2, 2025. Professional visuals with data labels, autonomy performance, incidents, and cost optimization." />
+  <title>Operational and Financial Summary for Semesters 1 and 2, 2025</title>
+
+  <!-- Chart.js and DataLabels plugin -->
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #f9fafb; color: #374151; line-height: 1.6;
+    }
+    .container { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+    .card { background: #fff; border-radius: 0.8rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .card h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 1rem; color: #78350f; }
+
+    .cover-slide { text-align: center; padding: 2.5rem; background-color: #fffbeb; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); animation: fadeIn 0.6s ease-in; border: 1px solid #fde68a; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .cover-slide h1 { font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; color: #b45309; }
+    .cover-slide p { color: #4b5563; font-size: 1.02rem; }
+    .cover-slide .meta { margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280; }
+
+    .text-sm { font-size: 0.92rem; }
+    .text-gray-700 { color: #374151; }
+    .text-gray-600 { color: #4b5563; }
+    .text-gray-800 { color: #1f2937; }
+    .italic { font-style: italic; }
+    .font-semibold { font-weight: 600; }
+    .text-center { text-align: center; }
+
+    ul.list-disc { list-style-type: disc; margin-left: 1.5rem; }
+    ol.list-decimal { list-style-type: decimal; margin-left: 1.5rem; }
+    .space-y-1 > * + * { margin-top: 0.25rem; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-3 { margin-top: 0.75rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    table th, table td { padding: 0.65rem; border: 1px solid #fcd34d; }
+    thead { background-color: #fef3c7; }
+    tbody tr:nth-child(even) { background: #fffbeb; }
+
+    a { color: #b45309; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .chart-container { position: relative; height: 340px; margin-top: 1rem; }
+
+    /* Highlighted conclusion card */
+    .conclusion { background-color: #fef3c7; border: 1px solid #facc15; }
+    .conclusion h2 { color: #92400e; font-size: 1.5rem; }
+
+    /* Buttons */
+    .btn { padding:0.6rem 0.9rem; border:1px solid #f59e0b; border-radius:0.6rem; background:#fff7ed; cursor:pointer; }
+    .btn:hover { background:#ffedd5; }
+
+    /* Print */
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #fff; }
+      .card { box-shadow: none; border: 1px solid #fcd34d; }
+      a { color: #92400e; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Logo Header -->
-    <div style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 2rem; margin-bottom: 2rem;">
-        <img src="logo.png" alt="robot.com logo" style="height: 56px; max-width: 320px;">
-    </div>
-    <div class="container space-y-8">
-        <!-- Cover Slide -->
-        <div class="cover-slide">
-            <h1>Salary Adjustment Proposal — $383 USD Increase</h1>
-            <p>Operational and Financial Justification (July–October 2025)</p>
-            <p class="meta">Prepared by: Cleider Viera | Department: Remote Operations</p>
-        </div>
+  <!-- Logo Header -->
+  <div style="width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 2rem; margin-bottom: 2rem;">
+    <img src="logo.png" alt="robot.com company logo" style="height: 56px; max-width: 320px;" />
+  </div>
 
-        <!-- Slide 1: Cost Optimization Results -->
-        <div class="card">
-            <h2>1. Cost Optimization Results (Weeks 1–8)</h2>
-            <div class="chart-container">
-                <canvas id="costChart"></canvas>
-            </div>
-            <p class="mt-4 text-gray-700 text-sm">
-                Core costs dropped 58.4%, saving $13.9K across all Autonomous Controller campuses.
-            </p>
-        </div>
-
-        <!-- Slide 2: Cost OD Behavior -->
-        <div class="card">
-            <h2>2. Additional Cost Behavior (Cost OD)</h2>
-            <div class="chart-container">
-                <canvas id="odChart"></canvas>
-            </div>
-            <p class="mt-4 text-gray-700 text-sm">
-                Average OD reduced 50.37%, cutting per-order costs in half.
-            </p>
-            <p class="mt-2 text-gray-600 text-sm italic">
-                Orders S01: 10,733 → S02: 7,241 (−32.5%) Although lower volume contributed to some savings, the data shows clear operational efficiency gains across all AC campuses.
-            </p>
-        </div>
-
-        <!-- Slide 3: Team Impact -->
-        <div class="card">
-            <h2>3. Direct Team Impact</h2>
-            <ul class="list-disc text-gray-700 text-sm space-y-1">
-                <li>ROAs reduced from 3 to 2 (−33%), saving ≈ $820.50 monthly with the same performance (AVG 120 tickets per week).</li>
-                <li>6 Autonomous Controllers added, requiring 1.5h/day supervision and performance (New Junior ROL).</li>
-                <li>Key driver of cost-efficiency and SLA improvements.</li>
-            </ul>
-        </div>
-
-        <!-- Slide 4: Operational Stability -->
-        <div class="card">
-            <h2>4. Operational Stability and Training Impact</h2>
-            <ul class="list-disc text-gray-700 text-sm space-y-1">
-                <li>Highest recorded rate of autonomous campuses.</li>
-                <li>90% of supervisors completed standardized autonomy training.</li>
-                <li>Each AC now manages up to 10 robots with excellent SLA performance.</li>
-                <li>Stable autonomy metrics and minimal interventions for AC.</li>
-            </ul>
-        </div>
-
-        <!-- Slide 5: Risk Management -->
-        <div class="card">
-            <h2>5. Incidents and Process Improvement</h2>
-            <div class="chart-container">
-                <canvas id="incidentsChart"></canvas>
-            </div>
-            <div class="mt-4 text-gray-700 text-sm space-y-2">
-                <p>6 supervisor fault incidents recorded (Jul–Oct), total cost $4,437.29.</p>
-                <p>Avg cost per incident ≈ $169.21 (excl. outlier 4E260 = $3,375.74).</p>
-                <p class="font-semibold">Root cause:</p>
-                <p>Incomplete mapping and protocol non-compliance (case 4E260).</p>
-
-                <div class="mt-2">
-                    <p class="font-semibold">Action Plan:</p>
-                    <ol class="list-decimal text-sm space-y-1">
-                        <li>Integrate new mapping specialist for retraining and QA.</li>
-                        <li>Expand voice-channel coordination and real-time cross-checks.</li>
-                        <li>Extend Autonomous Controller model to reduce supervisor-related incidents.</li>
-                    </ol>
-                </div>
-
-                <p class="mt-3 italic text-gray-600">
-                    Note: As of October 17, 2025, operations have achieved three consecutive accident-free weeks with the push protocols.
-                </p>
-            </div>
-        </div>
-
-        <!-- Slide 6: WCS Performance -->
-        <div class="card">
-            <h2>6. WCS (Wireless Charging Stations) Project Performance</h2>
-            <p class="text-blue-700 text-sm mb-2 font-semibold">
-                <a href="https://docs.google.com/document/d/1CQ_PhxGvYCUpt__j7hypox2edg6uJjlbwtgdff6hsLM/edit?usp=sharing" target="_blank" rel="noopener noreferrer">
-                    Summary of Results — WCS Memo
-                </a>
-            </p>
-            <ul class="list-disc text-gray-700 text-sm space-y-1">
-                <li>Identified and resolved 2 major system faults through coordinated analysis.</li>
-                <li>Introduced Mix Middle East night shift and monitoring for charging consistency.</li>
-                <li>Improved system stability and readiness for multi-campus rollout.</li>
-                <li>Process improvement: faster remote diagnostics and on-site corrective actions.</li>
-            </ul>
-        </div>
-
-        <!-- Slide 7: Autonomy Expansion -->
-        <div class="card">
-            <h2>7. Autonomy Expansion Results</h2>
-            <ul class="list-disc text-gray-700 text-sm space-y-1">
-                <li>82% autonomy rate achieved in 1.5 months.</li>
-                <li>Operational consistency and strong performance in AC campuses.</li>
-                <li>Expansion in RLR and CRY; HWU currently in progress.</li>
-            </ul>
-        </div>
-
-        <!-- Slide 8: Conclusion -->
-        <div class="card bg-yellow-100">
-            <h2 class="text-yellow-900 mb-4 text-center" style="font-size: 1.875rem;">
-                Conclusion — Justification for Salary Adjustment (+ $383 USD)
-            </h2>
-            <table class="text-sm text-gray-700">
-                <thead>
-                    <tr>
-                        <th>Factor</th>
-                        <th>Impact</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Operational cost optimization</td>
-                        <td>≈ $13.9 K USD saved in 8 weeks (results from the Remote Ops team, with campuses planned in Q2 by Carlos Camelo and Me. Executed by me).</td>
-                    </tr>
-                    <tr>
-                        <td>ROA cost structure reduction</td>
-                        <td>33 % reduction, sustained with equal performance.</td>
-                    </tr>
-                    <tr>
-                        <td>Management of 6 junior AC profiles</td>
-                        <td>+ 1.5 h/day dedicated to training, supervision, and performance follow-up.</td>
-                    </tr>
-                    <tr>
-                        <td>Operational stability + SLA compliance</td>
-                        <td>Highest autonomy rate and lowest intervention rate on record.</td>
-                    </tr>
-                    <tr>
-                        <td>WCS R&D and night-operations support</td>
-                        <td>Expanded technical scope and cross-functional coordination.</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="text-gray-800 text-sm mt-4" style="text-align: left;">
-                The combination of direct cost savings, structural optimization, expanded leadership responsibilities, training initiatives, and cross-project contributions substantiates the requested $383 USD salary adjustment.
-            </p>
-            <p class="text-gray-800 text-sm mt-2" style="text-align: left;">
-                This increase reflects both the measurable financial impact delivered and the broader strategic value contributed to operational performance, automation growth, and company savings.
-            </p>
-        </div>
+  <div class="container space-y-8">
+    <!-- Cover Slide -->
+    <div class="cover-slide">
+      <h1>Operational and Financial Summary for Semesters 1 and 2, 2025</h1>
+      <p class="meta">Prepared by: Cleider Viera · Department: Remote Operations</p>
     </div>
 
-    <script>
-        // Chart 1: Cost Optimization
-        const ctx1 = document.getElementById('costChart').getContext('2d');
-        new Chart(ctx1, {
-            type: 'bar',
-            data: {
-                labels: [' Comparative initial Cost', 'Final Cost'],
-                datasets: [{
-                    label: 'Cost in USD',
-                    data: [23810.46, 9901.68],
-                    backgroundColor: ['#facc15', '#fbbf24'],
-                    borderColor: ['#eab308', '#f59e0b'],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return '$' + context.parsed.y.toLocaleString('en-US', {minimumFractionDigits: 2});
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + value.toLocaleString('en-US');
-                            }
-                        }
-                    }
-                }
-            }
-        });
+    <!-- 1. Cost Optimization Comparison -->
+    <div class="card" id="cost-optimization">
+      <h2>1. Cost Optimization — Semester 1 vs Semester 2</h2>
+      <div class="chart-container">
+        <canvas id="costChart"></canvas>
+      </div>
+      <p class="mt-4 text-gray-700 text-sm">
+        Core costs dropped <strong>54.4%</strong>, saving <strong>$14.9K</strong> across all Autonomous Controller campuses.
+      </p>
+    </div>
 
-        // Chart 2: OD Behavior
-        const ctx2 = document.getElementById('odChart').getContext('2d');
-        new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: ['OD1', 'OD2'],
-                datasets: [{
-                    label: 'Cost OD',
-                    data: [2.03, 1.01],
-                    borderColor: '#78350f',
-                    backgroundColor: 'rgba(120, 53, 15, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + value.toFixed(2);
-                            }
-                        }
-                    }
-                }
-            }
-        });
+    <!-- 2. Additional Cost Behavior (Cost OD) -->
+    <div class="card" id="od-behavior">
+      <h2>2. Additional Cost Behavior (Cost OD)</h2>
+      <p class="text-sm text-gray-600">Average cost per order by campus, comparing OD1 vs OD2. Includes the 3-campus average.</p>
+      <div class="chart-container">
+        <canvas id="odChart"></canvas>
+      </div>
 
-        // Chart 3: Incidents
-        const ctx3 = document.getElementById('incidentsChart').getContext('2d');
-        new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['4E260', '4E203', '4E126', '4H005', '4H013', '4E299'],
-                datasets: [{
-                    label: 'Incident Cost',
-                    data: [3375.74, 104.4, 271.7, 99.83, 200.9, 305.74],
-                    backgroundColor: '#fbbf24',
-                    borderColor: '#f59e0b',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return '$' + context.parsed.y.toLocaleString('en-US', {minimumFractionDigits: 2});
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return '$' + value.toLocaleString('en-US');
-                            }
-                        }
-                    }
-                }
+      <table class="text-sm text-gray-700 mt-4">
+        <thead>
+          <tr>
+            <th>Campus</th>
+            <th style="text-align:right;">Avg Cost OD1 (USD)</th>
+            <th style="text-align:right;">Avg Cost OD2 (USD)</th>
+            <th style="text-align:right;">Δ (USD)</th>
+            <th style="text-align:right;">% Change</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Jacksonville State University</strong></td>
+            <td style="text-align:right;">$1.73</td>
+            <td style="text-align:right;">$1.07</td>
+            <td style="text-align:right;">–$0.66</td>
+            <td style="text-align:right;">–38%</td>
+          </tr>
+          <tr>
+            <td><strong>University of Maine Orono</strong></td>
+            <td style="text-align:right;">$2.15</td>
+            <td style="text-align:right;">$1.18</td>
+            <td style="text-align:right;">–$0.97</td>
+            <td style="text-align:right;">–45%</td>
+          </tr>
+          <tr>
+            <td><strong>University of Southern Indiana</strong></td>
+            <td style="text-align:right;">$2.09</td>
+            <td style="text-align:right;">$0.80</td>
+            <td style="text-align:right;">–$1.29</td>
+            <td style="text-align:right;">–62%</td>
+          </tr>
+          <tr>
+            <td><strong>Average (3 campuses)</strong></td>
+            <td style="text-align:right;"><strong>$1.99</strong></td>
+            <td style="text-align:right;"><strong>$1.02</strong></td>
+            <td style="text-align:right;"><strong>–$0.97</strong></td>
+            <td style="text-align:right;"><strong>–49%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="mt-2 text-sm italic text-gray-600">Lower volumes influenced costs, yet efficiency gains are evident across campuses.</p>
+    </div>
+
+    <!-- 3. Orders per campus -->
+    <div class="card" id="orders-per-campus">
+      <h2>3. Orders per Campus</h2>
+      <table class="text-sm text-gray-700">
+        <thead>
+          <tr>
+            <th>Campus</th>
+            <th style="text-align:right;">Initial Orders (S01)</th>
+            <th style="text-align:right;">Final Orders (S02)</th>
+            <th style="text-align:right;">% Change</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Jacksonville State University</strong></td>
+            <td style="text-align:right;">3,682</td>
+            <td style="text-align:right;">3,188</td>
+            <td style="text-align:right;">–13.41%</td>
+          </tr>
+          <tr>
+            <td><strong>University of Maine Orono</strong></td>
+            <td style="text-align:right;">6,305</td>
+            <td style="text-align:right;">4,230</td>
+            <td style="text-align:right;">–32.92%</td>
+          </tr>
+          <tr>
+            <td><strong>University of Southern Indiana</strong></td>
+            <td style="text-align:right;">3,313</td>
+            <td style="text-align:right;">2,300</td>
+            <td style="text-align:right;">–30.57%</td>
+          </tr>
+          <tr>
+            <td><strong>Total (All Campuses)</strong></td>
+            <td style="text-align:right;"><strong>13,300</strong></td>
+            <td style="text-align:right;"><strong>9,718</strong></td>
+            <td style="text-align:right;"><strong>–26.93%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 4. Cost per Mile -->
+    <div class="card" id="cost-per-mile">
+      <h2>4. Cost per Mile</h2>
+      <table class="text-sm text-gray-700">
+        <thead>
+          <tr>
+            <th>Campus</th>
+            <th style="text-align:right;">Miles S1</th>
+            <th style="text-align:right;">Cost per Mile S1</th>
+            <th style="text-align:right;">Miles S2</th>
+            <th style="text-align:right;">Cost per Mile S2</th>
+            <th style="text-align:right;">Cost per Mile Reduction %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Jacksonville State University</strong></td>
+            <td style="text-align:right;">2,688.6</td>
+            <td style="text-align:right;">$9,992</td>
+            <td style="text-align:right;">2,349.9</td>
+            <td style="text-align:right;">$4,212</td>
+            <td style="text-align:right;"><strong>–57.85%</strong></td>
+          </tr>
+          <tr>
+            <td><strong>University of Maine Orono</strong></td>
+            <td style="text-align:right;">5,042.1</td>
+            <td style="text-align:right;">$16,371</td>
+            <td style="text-align:right;">6,233.3</td>
+            <td style="text-align:right;">$2,458</td>
+            <td style="text-align:right;"><strong>–84.98%</strong></td>
+          </tr>
+          <tr>
+            <td><strong>University of Southern Indiana</strong></td>
+            <td style="text-align:right;">8,243.7</td>
+            <td style="text-align:right;">$4,783</td>
+            <td style="text-align:right;">7,358.6</td>
+            <td style="text-align:right;">$2,664</td>
+            <td style="text-align:right;"><strong>–44.29%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5. Direct Team Impact -->
+    <div class="card" id="direct-team-impact">
+      <h2>5. Direct Team Impact</h2>
+      <ul class="list-disc text-gray-700 text-sm space-y-1">
+        <li>ROAs reduced from 3 to 2 (–33%), saving ≈ $820.50 monthly with maintained throughput (avg 120 tickets/week).</li>
+        <li>Six Autonomous Controllers onboarded; requires ~1.5h/day of supervision and performance tracking (Junior role uplift).</li>
+        <li>Key driver of cost-efficiency and SLA improvements.</li>
+      </ul>
+
+      <h3 class="mt-3 text-center" style="font-size:1.08rem; font-weight:800; color:#78350f;">5.1 Scheduling Actions Reduction</h3>
+      <table class="text-sm text-gray-700 mt-2" style="text-align:center;">
+        <thead>
+          <tr>
+            <th style="text-align:center;">Campus</th>
+            <th style="text-align:center;">Initial supervisors S1</th>
+            <th style="text-align:center;">Final supervisors S2</th>
+            <th style="text-align:center;">Reduction %</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Jacksonville State University</strong></td>
+            <td>7</td>
+            <td>1</td>
+            <td><strong>–85.71%</strong></td>
+          </tr>
+          <tr>
+            <td><strong>University of Maine Orono</strong></td>
+            <td>12</td>
+            <td>2</td>
+            <td><strong>–83.33%</strong></td>
+          </tr>
+          <tr>
+            <td><strong>University of Southern Indiana</strong></td>
+            <td>11</td>
+            <td>2</td>
+            <td><strong>–81.82%</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Overall Average</strong></td>
+            <td><strong>10</strong></td>
+            <td><strong>1.7</strong></td>
+            <td><strong>–83.62%</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="mt-3" style="font-size:1.05rem; font-weight:800; color:#78350f;">5.2 Training and Autonomy Utilization</h3>
+      <p class="text-sm text-gray-700">90% of supervisors completed the standardized autonomy training, with an average autonomy utilization of <strong>75%</strong> of total miles traveled.</p>
+    </div>
+
+    <!-- 6. Operational Stability -->
+    <div class="card" id="operational-stability">
+      <h2>6. Operational Stability and Training Impact</h2>
+      <ul class="list-disc text-gray-700 text-sm space-y-1">
+        <li>Highest recorded rate of autonomous campuses.</li>
+        <li>Standardized autonomy training completion at 90%.</li>
+        <li>Each AC manages up to 10 robots with strong SLA performance.</li>
+        <li>Stable autonomy metrics and minimal interventions.</li>
+      </ul>
+      <h3 class="mt-3" style="font-size:1.05rem; font-weight:800; color:#78350f;">Autonomy Rate by Campus</h3>
+      <ul class="list-disc text-gray-700 text-sm space-y-1">
+        <li>Jacksonville State University: <strong>83%</strong></li>
+        <li>University of Maine Orono: <strong>93%</strong></li>
+        <li>University of Southern Indiana: <strong>88%</strong></li>
+      </ul>
+      <p class="mt-2 text-sm text-gray-700">We achieved the goal of mapping <strong>100%</strong> of campuses for autonomy, with effective training of <strong>12</strong> contractors dedicated to this task.</p>
+    </div>
+
+    <!-- 7. Incidents and Process Improvement -->
+    <div class="card" id="incidents">
+      <h2>7. Incidents and Process Improvement</h2>
+      <div class="chart-container">
+        <canvas id="incidentsChart"></canvas>
+      </div>
+      <div class="mt-4 text-gray-700 text-sm space-y-2">
+        <p>Eight supervisor-fault incidents recorded (Jul–Oct), total cost <strong>$4,553.24</strong>.</p>
+        <p>Average cost per incident ≈ <strong>$168.21</strong> (excluding outlier 4E260 = <strong>$3,375.74</strong>).</p>
+        <p class="font-semibold">Root cause:</p>
+        <p>Incomplete mapping and protocol non-compliance (notably case 4E260).</p>
+        <div class="mt-2">
+          <p class="font-semibold">Action Plan:</p>
+          <ol class="list-decimal text-sm space-y-1">
+            <li>Integrate mapping specialist for retraining and QA.</li>
+            <li>Expand voice-channel coordination and real-time cross-checks.</li>
+            <li>Extend the Autonomous Controller model to reduce supervisor-related incidents.</li>
+          </ol>
+        </div>
+        <p class="mt-3 italic text-gray-600">As of November 11, 2025, we maintain strict compliance with supervisory protocols, and no accidents attributable to the supervisor have been reported in the past three weeks.</p>
+      </div>
+    </div>
+
+    <!-- 8. WCS Performance -->
+    <div class="card" id="wcs">
+      <h2>8. WCS (Wireless Charging Stations) Project Performance</h2>
+      <p class="text-sm mb-2 font-semibold">
+        <a href="https://docs.google.com/document/d/1CQ_PhxGvYCUpt__j7hypox2edg6uJjlbwtgdff6hsLM/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Summary of Results — WCS Memo</a>
+      </p>
+      <ul class="list-disc text-gray-700 text-sm space-y-1">
+        <li>Identified and resolved two major system faults through coordinated analysis.</li>
+        <li>Introduced Middle East night shift monitoring for charging consistency.</li>
+        <li>Improved system stability and readiness for multi-campus rollout.</li>
+        <li>Process improvement: faster remote diagnostics and on-site corrective actions.</li>
+      </ul>
+    </div>
+
+    <!-- 9. Autonomy Expansion -->
+    <div class="card" id="autonomy-expansion">
+      <h2>9. Autonomy Expansion Results</h2>
+      <ul class="list-disc text-gray-700 text-sm space-y-1">
+        <li>82% autonomy rate achieved in 1.5 months.</li>
+        <li>Operational consistency and strong performance across AC campuses.</li>
+        <li>Expansion in RLR and CRY; HWU in progress.</li>
+      </ul>
+    </div>
+
+    <!-- 10. Conclusion: Salary Adjustment Proposal at the end -->
+    <div class="card conclusion" id="salary-proposal">
+      <h2 class="mb-4 text-center">Conclusion — Salary Adjustment Proposal (+ $383 USD)</h2>
+      <table class="text-sm text-gray-700">
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>Impact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Operational cost optimization</td>
+            <td>≈ $14.9K saved semester-over-semester (Remote Ops execution across AC campuses).</td>
+          </tr>
+          <tr>
+            <td>ROA cost structure reduction</td>
+            <td>$500 USD per month — 33% reduction, sustained with equal performance.</td>
+          </tr>
+          <tr>
+            <td>Management of 6 junior AC profiles</td>
+            <td>~1.5 h/day dedicated to training, supervision, and performance follow-up.</td>
+          </tr>
+          <tr>
+            <td>Operational stability + SLA compliance</td>
+            <td>Highest autonomy rate and lowest intervention rate on record.</td>
+          </tr>
+          <tr>
+            <td>WCS R&D and night-operations support</td>
+            <td>Expanded technical scope and cross-functional coordination.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="text-gray-800 text-sm mt-4" style="text-align: left;">
+        The combination of direct cost savings, structural optimization, expanded leadership responsibilities, training initiatives, and cross-project contributions substantiates the requested <strong>$383 USD</strong> salary adjustment.
+      </p>
+      <p class="text-gray-800 text-sm mt-2" style="text-align: left;">
+        This increase reflects both the measurable financial impact and the broader strategic value contributed to operational performance, autonomy growth, and company savings.
+      </p>
+      <p class="text-gray-800 text-sm mt-4"><strong>Acknowledgments:</strong> Special thanks to <strong>Bryann Moreno</strong> and <strong>Miguel Noche</strong> for critical support improving contractor performance and executing scheduling to meet cost objectives.</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="no-print" style="display:flex; gap:0.5rem; justify-content:flex-end;">
+      <button onclick="window.print()" class="btn">Print / Save as PDF</button>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!window.Chart) return;
+      if (window.ChartDataLabels) { Chart.register(ChartDataLabels); }
+
+      const fmtUSD = (v, frac = 0) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: frac, maximumFractionDigits: frac }).format(v);
+
+      // Palette: yellow/orange only
+      const colors = {
+        amber: '#fbbf24',      // bars 1
+        amberDark: '#f59e0b',  // borders 1
+        orange: '#fb923c',     // bars 2
+        orangeDark: '#f97316', // borders 2
+        yellow: '#fde047'      // incidents
+      };
+
+      // 1) Cost Optimization — Semester 1 vs Semester 2
+      const costCtx = document.getElementById('costChart').getContext('2d');
+      new Chart(costCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Initial Cost (S1)', 'Final Cost (S2)'],
+          datasets: [{
+            label: 'Cost (USD)',
+            data: [27505, 12578],
+            backgroundColor: [colors.amber, colors.orange],
+            borderColor: [colors.amberDark, colors.orangeDark],
+            borderWidth: 1,
+            borderRadius: 7
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: ctx => fmtUSD(ctx.parsed.y, 0) } },
+            datalabels: {
+              anchor: 'end', align: 'end', offset: 2,
+              formatter: v => fmtUSD(v, 0),
+              font: { weight: '700' }, color: '#78350f'
             }
-        });
-    </script>
+          },
+          scales: {
+            y: { beginAtZero: true, ticks: { callback: v => fmtUSD(v, 0) } }
+          }
+        }
+      });
+
+      // 2) Additional Cost Behavior (Cost OD) — grouped bars with average
+      const odCtx = document.getElementById('odChart').getContext('2d');
+      const campuses = [
+        'Jacksonville State University',
+        'University of Maine Orono',
+        'University of Southern Indiana',
+        'Average (3 campuses)'
+      ];
+      const od1 = [1.73, 2.15, 2.09, 1.99];
+      const od2 = [1.07, 1.18, 0.80, 1.02];
+
+      new Chart(odCtx, {
+        type: 'bar',
+        data: {
+          labels: campuses,
+          datasets: [
+            { label: 'Avg Cost OD1', data: od1, backgroundColor: colors.orange, borderColor: colors.orangeDark, borderWidth: 1, borderRadius: 7 },
+            { label: 'Avg Cost OD2', data: od2, backgroundColor: colors.amber, borderColor: colors.amberDark, borderWidth: 1, borderRadius: 7 }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'top' },
+            tooltip: {
+              callbacks: {
+                label: ctx => `${ctx.dataset.label}: ${fmtUSD(ctx.parsed.y, 2)}`,
+                afterBody: (items) => {
+                  const idx = items[0].dataIndex;
+                  const d = od2[idx] - od1[idx];
+                  const pct = ((od2[idx] / od1[idx]) - 1) * 100;
+                  return [`Δ: ${fmtUSD(d, 2)}`, `% Change: ${pct.toFixed(0)}%`];
+                }
+              }
+            },
+            datalabels: {
+              anchor: 'end', align: 'end', offset: 2,
+              formatter: (v) => fmtUSD(v, 2),
+              font: { weight: '700', size: 10 }, color: '#78350f'
+            }
+          },
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'USD per order' }, ticks: { callback: v => fmtUSD(v, 0) } },
+            x: { ticks: { maxRotation: 30, minRotation: 0 } }
+          }
+        }
+      });
+
+      // 7) Incidents — bar with data labels (added 4E202 and 4E266)
+      const incidentsCtx = document.getElementById('incidentsChart').getContext('2d');
+      const incidentLabels = ['4E260', '4E203', '4E126', '4H005', '4H013', '4E299', '4E202', '4E266'];
+      const incidentData   = [3375.74, 104.4, 271.7, 99.83, 200.9, 305.74, 184.93, 10];
+
+      new Chart(incidentsCtx, {
+        type: 'bar',
+        data: {
+          labels: incidentLabels,
+          datasets: [{
+            label: 'Incident Cost',
+            data: incidentData,
+            backgroundColor: colors.yellow,
+            borderColor: colors.amberDark,
+            borderWidth: 1,
+            borderRadius: 7
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: ctx => fmtUSD(ctx.parsed.y, 2) } },
+            datalabels: {
+              anchor: 'end', align: 'end', offset: 2,
+              formatter: v => fmtUSD(v, 2),
+              font: { weight: '700', size: 10 }, color: '#78350f'
+            }
+          },
+          scales: {
+            y: { beginAtZero: true, ticks: { callback: v => fmtUSD(v, 0) } }
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
